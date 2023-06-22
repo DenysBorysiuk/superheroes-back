@@ -2,14 +2,18 @@ const ctrlWrapper = require("../helpers/ctrlWrapper");
 const { Hero } = require("../models/hero");
 
 const getAll = async (req, res) => {
-  const allHeroes = await Hero.find();
+  const { page = 1, limit = 20 } = req.query;
+  const skip = (page - 1) * limit;
+
+  const allHeroes = await Hero.find().skip(skip).limit(limit);
 
   return res.json(allHeroes);
 };
 
 const getById = async (req, res) => {
+  console.log(req.params);
   const { heroId } = req.params;
-  const result = await Hero.findById(heroId);
+  const result = await Hero.findById({ _id: heroId });
 
   if (!result) {
     return res.status(404).json({ message: "Not found" });

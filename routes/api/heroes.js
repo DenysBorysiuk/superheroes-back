@@ -17,7 +17,7 @@ router.get("/:heroId", isValidId, ctrl.getById);
 
 router.post(
   "/",
-  upload.array("images", 12),
+  upload.array("images", 5),
   validateBody(addSchema),
   ctrl.addNew
 );
