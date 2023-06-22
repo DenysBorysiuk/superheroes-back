@@ -48,10 +48,6 @@ const updateSchema = Joi.object({
   .required()
   .min(1);
 
-const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean().required(),
-});
-
 const Hero = model("hero", heroSchema);
 
-module.exports = { addSchema, updateSchema, updateFavoriteSchema, Hero };
+module.exports = { addSchema, updateSchema, Hero };

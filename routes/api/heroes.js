@@ -3,11 +3,7 @@ const router = express.Router();
 const ctrl = require("../../controllers/heroes");
 const validateBody = require("../../middlewares/validateBody");
 const isValidId = require("../../middlewares/isValidId");
-const {
-  addSchema,
-  updateSchema,
-  updateFavoriteSchema,
-} = require("../../models/hero");
+const { addSchema, updateSchema } = require("../../models/hero");
 
 const upload = require("../../middlewares/upload");
 
@@ -26,11 +22,11 @@ router.delete("/:heroId", isValidId, ctrl.deleteById);
 
 router.put("/:heroId", isValidId, validateBody(updateSchema), ctrl.updateById);
 
-router.patch(
-  "/:heroId/favorite",
-  isValidId,
-  validateBody(updateFavoriteSchema),
-  ctrl.updateById
-);
+// router.patch(
+//   "/:heroId/favorite",
+//   isValidId,
+//   validateBody(updateFavoriteSchema),
+//   ctrl.updateById
+// );
 
 module.exports = router;

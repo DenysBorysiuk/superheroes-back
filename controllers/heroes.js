@@ -65,24 +65,10 @@ const updateById = async (req, res) => {
   return res.json(result);
 };
 
-const updateFavorite = async (req, res) => {
-  const { heroId } = req.params;
-  const result = await Hero.findByIdAndUpdate(heroId, req.body, {
-    new: true,
-  });
-
-  if (!result) {
-    return res.status(404).json({ message: "Not found" }).end();
-  }
-
-  return res.json(result);
-};
-
 module.exports = {
   getAll: ctrlWrapper(getAll),
   getById: ctrlWrapper(getById),
   addNew: ctrlWrapper(addNew),
   deleteById: ctrlWrapper(deleteById),
   updateById: ctrlWrapper(updateById),
-  updateFavorite: ctrlWrapper(updateFavorite),
 };
