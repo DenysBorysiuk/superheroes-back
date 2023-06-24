@@ -2,12 +2,20 @@ const ctrlWrapper = require("../helpers/ctrlWrapper");
 const { Hero } = require("../models/hero");
 
 const getAll = async (req, res) => {
-  const { page = 1, limit = 20 } = req.query;
+  const { page, limit } = req.query;
   const skip = (page - 1) * limit;
 
-  const allHeroes = await Hero.find().skip(skip).limit(limit);
+  const allHeroes = await Hero.find().count();
+  const heroes = await Hero.find().skip(skip).limit(limit);
 
-  return res.json(allHeroes);
+  return res.json({
+    status: "success",
+    code: 200,
+    data: {
+      totalPages: Math.ceil(allHeroes / limit),
+      heroes,
+    },
+  });
 };
 
 const getById = async (req, res) => {
