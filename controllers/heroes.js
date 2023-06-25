@@ -6,7 +6,10 @@ const getAll = async (req, res) => {
   const skip = (page - 1) * limit;
 
   const allHeroes = await Hero.find().count();
-  const heroes = await Hero.find().skip(skip).limit(limit);
+  const heroes = await Hero.find()
+    .skip(skip)
+    .limit(limit)
+    .sort({ createdAt: -1 });
 
   return res.json({
     status: "success",
