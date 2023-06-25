@@ -23,15 +23,8 @@ router.delete("/:heroId", isValidId, ctrl.deleteById);
 router.put(
   "/:heroId",
   upload.array("files", 5),
-  // validateBody(updateSchema),
+  validateBody(updateSchema),
   ctrl.updateById
 );
-
-// router.patch(
-//   "/:heroId/favorite",
-//   isValidId,
-//   validateBody(updateFavoriteSchema),
-//   ctrl.updateById
-// );
 
 module.exports = router;

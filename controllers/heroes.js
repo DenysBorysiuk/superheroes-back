@@ -66,7 +66,6 @@ const updateById = async (req, res) => {
   const { heroId } = req.params;
   const { images } = req.body;
   const imagesArr = JSON.parse(images) || [];
-  console.log(imagesArr);
 
   if (req.files) {
     req.files.forEach((file) => {
