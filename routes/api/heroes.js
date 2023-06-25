@@ -20,7 +20,12 @@ router.post(
 
 router.delete("/:heroId", isValidId, ctrl.deleteById);
 
-router.put("/:heroId", isValidId, validateBody(updateSchema), ctrl.updateById);
+router.put(
+  "/:heroId",
+  upload.array("files", 5),
+  validateBody(updateSchema),
+  ctrl.updateById
+);
 
 // router.patch(
 //   "/:heroId/favorite",

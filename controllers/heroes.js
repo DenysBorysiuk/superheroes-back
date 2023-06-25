@@ -22,7 +22,6 @@ const getAll = async (req, res) => {
 };
 
 const getById = async (req, res) => {
-  console.log(req.params);
   const { heroId } = req.params;
   const result = await Hero.findById({ _id: heroId });
 
@@ -65,7 +64,21 @@ const deleteById = async (req, res) => {
 
 const updateById = async (req, res) => {
   const { heroId } = req.params;
-  const result = await Hero.findByIdAndUpdate(heroId, req.body, {
+  const [images] = req.body;
+
+  if (req.files) {
+    req.files.forEach((file) => {
+      const imagePath = "images/" + file.filename;
+      images.push(imagePath);
+    });
+  }
+
+  const updatedHero = {
+    ...req.body,
+    images,
+  };
+
+  const result = await Hero.findByIdAndUpdate(heroId, updatedHero, {
     new: true,
   });
 
