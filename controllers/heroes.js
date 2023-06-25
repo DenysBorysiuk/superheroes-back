@@ -64,18 +64,20 @@ const deleteById = async (req, res) => {
 
 const updateById = async (req, res) => {
   const { heroId } = req.params;
-  const [images] = req.body;
+  const { images } = req.body;
+  const imagesArr = JSON.parse(images) || [];
+  console.log(imagesArr);
 
   if (req.files) {
     req.files.forEach((file) => {
       const imagePath = "images/" + file.filename;
-      images.push(imagePath);
+      imagesArr.push(imagePath);
     });
   }
 
   const updatedHero = {
     ...req.body,
-    images,
+    images: imagesArr,
   };
 
   const result = await Hero.findByIdAndUpdate(heroId, updatedHero, {

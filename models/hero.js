@@ -44,7 +44,7 @@ const updateSchema = Joi.object({
   origin_description: Joi.string().min(3).optional(),
   superpowers: Joi.string().min(3).optional(),
   catch_phrase: Joi.string().min(3).optional(),
-  images: Joi.optional(),
+  // images: Joi.optional(),
 })
   .required()
   .min(1);
